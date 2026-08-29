@@ -1,4 +1,4 @@
-Makine öğrenmesi çalışırken sıfırdan yazdığım Jupyter Notebook'ları. Her notebook tek bir konuya odaklanıyor: veriyi keşfetme, ön işleme, modeli kurma, hiperparametre optimizasyonu ve sonuçları değerlendirme adımlarını baştan sona içeriyor. Basit doğrusal regresyondan başlayıp SVM ve Naive Bayes'e kadar ilerliyor.
+Makine öğrenmesi çalışırken sıfırdan yazdığım Jupyter Notebook'ları. Her notebook tek bir konuya odaklanıyor: veriyi keşfetme, ön işleme, modeli kurma, hiperparametre optimizasyonu ve sonuçları değerlendirme adımlarını baştan sona içeriyor. Basit doğrusal regresyondan başlayıp SVM, Naive Bayes, KNN ve karar ağaçlarına kadar ilerliyor.
 
 ## İçerik
 
@@ -24,6 +24,26 @@ Makine öğrenmesi çalışırken sıfırdan yazdığım Jupyter Notebook'ları.
 | 10 | `10-SVMRegressor.ipynb` | Destek Vektör Makineleri – regresyon (SVR) | — |
 | 11 | `11-NaiveBayesClassifier.ipynb` | Gaussian Naive Bayes; SVC ve Lojistik Regresyon ile karşılaştırma | `Iris.csv` |
 
+### KNN ve Karar Ağaçları
+
+| # | Notebook | Konu | Veri seti |
+|---|---|---|---|
+| 12 | `12-KNNClassifierAndRegressor.ipynb` | K-En Yakın Komşu; `algorithm` ve `n_neighbors` karşılaştırmaları, sınıflandırma ve regresyon | `12-health_risk_classification.csv`, `12-house_energy_regression.csv` |
+| 13 | `13-DecisionTreeClassifier.ipynb` | Karar ağacı sınıflandırıcı; OrdinalEncoder, ColumnTransformer, Pipeline, GridSearchCV | `car_evaluation.csv` |
+
+### Proje
+
+| Notebook | Konu | Veri seti |
+|---|---|---|
+| `DecisionTreeRegressionProject.ipynb` | Karar ağacı regresyonuyla uçtan uca proje: ABD ilçelerinde kanser ölüm oranı tahmini | `cancer_reg.csv` |
+
+Bu projede öne çıkanlar:
+
+- Türev sütun tespiti — `binnedinc`, `medincome`'ın binlenmiş kopyası olduğu için çıkarıldı
+- Eksik veriye üç farklı yaklaşım: yüzdelerin 100'e tamamlanmasından hesaplama, medyanla doldurma, korelasyonu yüksek sütun üzerinden doğrusal regresyonla tahmin
+- `geography` sütunundan eyalet bilgisinin ayrıştırılması ve `TargetEncoder` ile kodlanması
+- `GridSearchCV` ile `max_depth`, `min_samples_leaf` ve `criterion` optimizasyonu
+
 ## Kullanılan kütüphaneler
 
 - **pandas**, **numpy** — veri işleme
@@ -33,11 +53,14 @@ Makine öğrenmesi çalışırken sıfırdan yazdığım Jupyter Notebook'ları.
 ## Öne çıkan konular
 
 - Keşifsel veri analizi (`pairplot`, `scatterplot`, korelasyon incelemeleri)
-- `LabelEncoder` ve `StandardScaler` ile ön işleme
-- `train_test_split` ile eğitim/test ayrımı
+- Eksik veri stratejileri: hesaplama, medyan, regresyon tabanlı doldurma
+- Kategorik kodlama: `LabelEncoder`, `OrdinalEncoder`, `TargetEncoder`
+- `StandardScaler` ile ölçekleme ve hangi modellerde gerekli olduğu
+- `ColumnTransformer` ve `Pipeline` ile ön işleme adımlarının birleştirilmesi
+- `train_test_split` ile eğitim/test ayrımı, veri sızıntısından kaçınma
 - `GridSearchCV` ve `RandomizedSearchCV` ile hiperparametre optimizasyonu
 - `StratifiedKFold` ile çapraz doğrulama
-- Confusion matrix, classification report ve accuracy ile değerlendirme
+- Sınıflandırmada confusion matrix, classification report, accuracy; regresyonda MAE, MSE, R²
 
 ## Kurulum
 
@@ -53,6 +76,8 @@ jupyter notebook
 ```
 
 Notebook'lar veri setlerini aynı klasörden okuduğu için (`pd.read_csv("Iris.csv")`), dosya yapısını değiştirmeden çalıştırman yeterli.
+
+> **Not:** `13-DecisionTreeClassifier.ipynb`, repoda bulunmayan `car_evaluation.csv` dosyasını okuyor. Notebook'u çalıştırmadan önce bu dosyayı klasöre eklemen gerekiyor.
 
 ## Notlar
 
